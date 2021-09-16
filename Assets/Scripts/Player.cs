@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -26,7 +27,17 @@ public class Player : MonoBehaviour
             spaceDown = true;
         }
 
-        horzInput = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+            horzInput = Input.GetAxis("Horizontal");
     }
 
     //  Called once every physics update (default 100fps (faster than Update))
@@ -46,6 +57,11 @@ public class Player : MonoBehaviour
             rigidbodyComponent.AddForce(Vector3.up * 5, ForceMode.VelocityChange);
             spaceDown = false;
         }
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
